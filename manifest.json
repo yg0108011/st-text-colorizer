@@ -1,0 +1,18 @@
+{
+    "display_name": "Text Colorizer 文字着色",
+    "loading_order": 20,
+    "requires": [],
+    "optional": [],
+    "dependencies": [],
+    "js": "index.js",
+    "css": "style.css",
+    "author": "doubao",
+    "version": "1.0.0",
+    "homePage": "https://github.com/yg0108011/st-text-colorizer",
+    "auto_update": true,
+    "minimum_client_version": "1.10.0",
+    "hooks": {
+        "enable": "onEnable",
+        "disable": "onDisable"
+    }
+}
