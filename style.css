@@ -1,0 +1,349 @@
+/* Text Colorizer 文字着色 —— 面板样式
+ * 原则：字号不写死（继承酒馆 --mainFontSize / body），颜色引用酒馆主题变量并带兜底。
+ */
+
+.stcx-panel {
+    /* 主题变量（跟随当前酒馆主题），兜底为中性深色 */
+    --stcx-bg: var(--SmartThemeBlurTintColor, rgba(32, 32, 36, 0.55));
+    --stcx-bg-soft: rgba(32, 32, 36, 0.38);
+    --stcx-bg-soft: color-mix(in srgb, var(--SmartThemeBlurTintColor, rgba(32, 32, 36, 0.55)) 70%, transparent);
+    --stcx-border: var(--SmartThemeBorderColor, rgba(255, 255, 255, 0.16));
+    --stcx-text: var(--SmartThemeBodyColor, inherit);
+    --stcx-accent: var(--SmartThemeQuoteColor, #a9c4ff);
+    --stcx-radius: 10px;
+    --stcx-gap: 10px;
+
+    color: var(--stcx-text);
+    font-size: inherit; /* 字号跟随酒馆，不单独设定 */
+    line-height: 1.5;
+}
+
+.stcx-panel *,
+.stcx-panel *::before,
+.stcx-panel *::after {
+    box-sizing: border-box;
+}
+
+.stcx-panel .stcx-global {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 2px 12px;
+}
+
+.stcx-toggle-row,
+.stcx-mode {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    opacity: 0.92;
+}
+
+.stcx-toggle-row:hover,
+.stcx-mode:hover {
+    opacity: 1;
+}
+
+.stcx-group-label {
+    opacity: 0.7;
+    font-size: 0.92em;
+}
+
+.stcx-mode-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-left: 2px;
+}
+
+.stcx-global-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-top: 4px;
+}
+
+.stcx-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.stcx-field input[type="number"] {
+    width: 64px;
+    background: var(--stcx-bg-soft);
+    color: var(--stcx-text);
+    border: 1px solid var(--stcx-border);
+    border-radius: 6px;
+    padding: 3px 8px;
+    font-size: inherit;
+}
+
+/* ---------------- 两栏布局：左纯色 / 右渐变 ---------------- */
+
+.stcx-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--stcx-gap);
+    margin: 8px 0 12px;
+}
+
+.stcx-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.stcx-column-solid,
+.stcx-column-gradient {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.stcx-column-gradient {
+    border-radius: var(--stcx-radius);
+}
+
+.stcx-column-header {
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 6px 10px;
+    border-radius: var(--stcx-radius) var(--stcx-radius) 0 0;
+    border: 1px solid var(--stcx-border);
+    background: var(--stcx-bg);
+}
+
+.stcx-column-header-gradient {
+    color: var(--stcx-accent);
+    border-color: var(--stcx-border);
+    background: var(--stcx-bg);
+    border-color: color-mix(in srgb, var(--stcx-accent) 45%, var(--stcx-border));
+    background: color-mix(in srgb, var(--stcx-accent) 10%, var(--stcx-bg));
+}
+
+.stcx-mode-pair {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.stcx-grid-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ---------------- 卡片 ---------------- */
+
+.stcx-card {
+    background: var(--stcx-bg);
+    border: 1px solid var(--stcx-border);
+    border-radius: var(--stcx-radius);
+    padding: 10px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stcx-grad-card {
+    border-color: var(--stcx-border);
+    border-color: color-mix(in srgb, var(--stcx-accent) 32%, var(--stcx-border));
+}
+
+.stcx-card-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stcx-card-title {
+    font-weight: 600;
+}
+
+.stcx-recommend {
+    font-style: normal;
+    font-size: 0.78em;
+    font-weight: 600;
+    color: var(--stcx-accent);
+    background: rgba(169, 196, 255, 0.14);
+    background: color-mix(in srgb, var(--stcx-accent) 14%, transparent);
+    border-radius: 6px;
+    padding: 1px 7px;
+}
+
+.stcx-card-hint {
+    opacity: 0.62;
+    font-size: 0.86em;
+}
+
+.stcx-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.stcx-swatch-row {
+    justify-content: space-between;
+}
+
+/* 颜色选择器 */
+.stcx-color-input {
+    width: 42px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid var(--stcx-border);
+    border-radius: 7px;
+    background: transparent;
+    cursor: pointer;
+}
+
+.stcx-color-input::-webkit-color-swatch-wrapper {
+    padding: 2px;
+}
+
+.stcx-color-input::-webkit-color-swatch {
+    border: none;
+    border-radius: 5px;
+}
+
+.stcx-colorlist {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.stcx-color-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.stcx-hex {
+    opacity: 0.75;
+    font-size: 0.88em;
+    font-family: inherit;
+    min-width: 74px;
+}
+
+.stcx-remove-color {
+    margin-left: auto;
+    width: 24px;
+    height: 24px;
+    line-height: 1;
+    border: 1px solid var(--stcx-border);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--stcx-text);
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.stcx-remove-color:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.stcx-gradient-bar {
+    height: 12px;
+    border-radius: 6px;
+    border: 1px solid var(--stcx-border);
+}
+
+.stcx-text-preview {
+    opacity: 0.95;
+    font-size: 0.95em;
+}
+
+.stcx-grad-preview {
+    font-weight: 600;
+}
+
+/* ---------------- 按钮 ---------------- */
+
+.stcx-btn {
+    background: var(--stcx-bg);
+    color: var(--stcx-text);
+    border: 1px solid var(--stcx-border);
+    border-radius: 8px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: inherit;
+    transition: filter 0.15s ease;
+}
+
+.stcx-btn:hover {
+    filter: brightness(1.15);
+}
+
+.stcx-add-color {
+    background: transparent;
+    color: var(--stcx-accent);
+    border: 1px dashed var(--stcx-border);
+    border-radius: 8px;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: inherit;
+}
+
+.stcx-btn-danger {
+    border-color: rgba(255, 120, 120, 0.4);
+    color: var(--stcx-text);
+}
+
+.stcx-actions {
+    display: flex;
+    gap: 10px;
+    padding-top: 4px;
+}
+
+/* ---------------- 实时预览 ---------------- */
+
+.stcx-preview-box {
+    background: var(--stcx-bg);
+    border: 1px solid var(--stcx-border);
+    border-radius: var(--stcx-radius);
+    padding: 10px 12px;
+    margin: 4px 0;
+}
+
+.stcx-preview-title {
+    font-weight: 600;
+    margin-bottom: 6px;
+    opacity: 0.85;
+}
+
+.stcx-preview-body {
+    line-height: 1.7;
+}
+
+.stcx-preview-body blockquote {
+    margin: 6px 0;
+    padding-left: 10px;
+    border-left: 2px solid var(--stcx-border);
+    opacity: 0.95;
+}
+
+.stcx-preview-body q {
+    quotes: "“" "”";
+}
+
+/* ---------------- 窄屏（手机端酒馆）：两栏改单列 ---------------- */
+
+@media (max-width: 720px) {
+    .stcx-columns {
+        grid-template-columns: 1fr;
+    }
+
+    .stcx-actions {
+        flex-direction: column;
+    }
+}
